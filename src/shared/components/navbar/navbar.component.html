@@ -1,0 +1,39 @@
+<nav class="bg-white shadow-md sticky top-0 z-50">
+  <div class="container mx-auto px-6 py-4">
+    <div class="flex justify-between items-center">
+      <div class="flex items-center space-x-3 cursor-pointer" routerLink="/">
+        <div class="w-12 h-12 bg-primary rounded-full">
+          <img src="assets/logo.png" class="w-12 h-12">
+        </div>
+        <span class="text-2xl font-bold text-primary">Chop & Enjoy</span>
+      </div>
+      
+      <div class="hidden md:flex space-x-8">
+        <a routerLink="/" class="text-dark hover:text-primary transition">Accueil</a>
+        <a routerLink="/dishes" class="text-dark hover:text-primary transition">Plats</a>
+        <a *ngIf="currentUser?.role === 'cook'" routerLink="/cook" class="text-dark hover:text-primary transition">Dashboard</a>
+      </div>
+      
+      <div class="flex space-x-4" *ngIf="!currentUser">
+        <button routerLink="/auth/login" class="px-6 py-2 border-2 border-primary text-primary rounded-full hover:bg-primary hover:text-white transition font-semibold">
+          Connexion
+        </button>
+        <button routerLink="/auth/register" class="px-6 py-2 bg-primary text-white rounded-full hover:bg-primary-light transition font-semibold">
+          Inscription
+        </button>
+      </div>
+      
+      <div class="flex items-center space-x-4" *ngIf="currentUser">
+        <div class="flex items-center space-x-3 cursor-pointer">
+          <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+            <span class="text-white font-bold">{{ currentUser.firstName[0] }}{{ currentUser.lastName[0] }}</span>
+          </div>
+          <span class="font-semibold text-dark">{{ currentUser.firstName }}</span>
+        </div>
+        <button (click)="logout()" class="text-sm text-gray-600 hover:text-primary">
+          Déconnexion
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
